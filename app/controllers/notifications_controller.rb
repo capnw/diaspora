@@ -68,7 +68,7 @@ class NotificationsController < ApplicationController
 
   def read_all
     current_type = types[params[:type]]
-    notifications = Notification.where(recipient_id: current_user.id, unread: true)
+    notifications = current_user.unread_notifications
     notifications = notifications.where(type: current_type) if params[:type]
     notifications.update_all(unread: false)
     respond_to do |format|

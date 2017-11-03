@@ -99,7 +99,7 @@ class User < ApplicationRecord
   end
 
   def unread_notifications
-    notifications.where(:unread => true)
+    notifications.unread
   end
 
   def unread_message_count

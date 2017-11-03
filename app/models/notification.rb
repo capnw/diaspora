@@ -10,6 +10,8 @@ class Notification < ApplicationRecord
   has_many :actors, class_name: "Person", through: :notification_actors, source: :person
   belongs_to :target, polymorphic: true
 
+  scope :unread, -> { where(:unread => true) }
+
   def self.for(recipient, opts={})
     where(opts.merge!(recipient_id: recipient.id)).order("updated_at DESC")
   end
